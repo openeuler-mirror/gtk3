@@ -13,7 +13,7 @@
 #Basic Information
 Name:    gtk3
 Version: 3.24.1
-Release: 1
+Release: 2
 Summary: GTK+ graphical user interface library
 License: LGPLv2+
 URL:     http://www.gtk.org
@@ -246,6 +246,6 @@ gtk-query-immodules-3.0-64 --update-cache &>/dev/null || :
 %{_mandir}/man1/gtk3-widget-factory.1*
 
 %changelog
-* Wed Sep 18 2019 openEuler Buildteam <buildteam@openeuler.org> - 3.24.1-1
+* Wed Sep 18 2019 openEuler Buildteam <buildteam@openeuler.org> - 3.24.1-2
 - Package init
 
