@@ -8,12 +8,13 @@
 %define wayland_version 1.9.91
 %define wayland_protocols_version 1.12
 %define bin_version 3.0.0
+%define enable_immodules_package 0
 %global __provides_exclude_from ^%{_libdir}/gtk-3.0
 
 #Basic Information
 Name:    gtk3
 Version: 3.24.1
-Release: 2
+Release: 3
 Summary: GTK+ graphical user interface library
 License: LGPLv2+
 URL:     http://www.gtk.org
@@ -54,6 +55,7 @@ flexibility. The GTK+ library contains a set of graphical control elements
 (widgets)for creating graphical user interfaces. This package contains version 3
 of GTK+.
 
+%if 0%{?enable_immodules_package}
 %package       immodules
 Summary:       Input methods for GTK+
 Requires:      gtk3 = %{version}-%{release}
@@ -62,6 +64,7 @@ Requires:      gtk2-immodules
 %description   immodules
 The gtk3-immodules package contains standalone input methods that
 are shipped as part of GTK+ 3.
+%endif
 
 %package       immodule-xim
 Summary:       XIM support for GTK+
@@ -186,7 +189,12 @@ gtk-query-immodules-3.0-64 --update-cache &>/dev/null || :
 %{_datadir}/glib-2.0/schemas/org.gtk.Settings.EmojiChooser.gschema.xml
 %{_datadir}/glib-2.0/schemas/org.gtk.Settings.FileChooser.gschema.xml
 %{_datadir}/glib-2.0/schemas/org.gtk.exampleapp.gschema.xml
+%if ! 0%{?enable_immodules_package}
+%exclude %{_libdir}/gtk-3.0/%{bin_version}/immodules/*
+%exclude %{_sysconfdir}/gtk-3.0/im-multipress.conf
+%endif
 
+%if 0%{?enable_immodules_package}
 %files immodules
 %config(noreplace) %{_sysconfdir}/gtk-3.0/im-multipress.conf
 %{_libdir}/gtk-3.0/%{bin_version}/immodules/im-am-et.so
@@ -200,6 +208,7 @@ gtk-query-immodules-3.0-64 --update-cache &>/dev/null || :
 %{_libdir}/gtk-3.0/%{bin_version}/immodules/im-ti-er.so
 %{_libdir}/gtk-3.0/%{bin_version}/immodules/im-ti-et.so
 %{_libdir}/gtk-3.0/%{bin_version}/immodules/im-viqr.so
+%endif
 
 %files immodule-xim
 %{_libdir}/gtk-3.0/%{bin_version}/immodules/im-xim.so
@@ -246,6 +255,9 @@ gtk-query-immodules-3.0-64 --update-cache &>/dev/null || :
 %{_mandir}/man1/gtk3-widget-factory.1*
 
 %changelog
+* Sat Mar 14 2020 songnannan <songnannan2@huawei.com> - 3.24.1-3
+- disable package
+
 * Wed Sep 18 2019 openEuler Buildteam <buildteam@openeuler.org> - 3.24.1-2
 - Package init
 
