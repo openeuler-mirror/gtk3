@@ -13,7 +13,7 @@
 
 #Basic Information
 Name:    gtk3
-Version: 3.24.1
+Version: 3.24.20
 Release: 3
 Summary: GTK+ graphical user interface library
 License: LGPLv2+
@@ -40,9 +40,6 @@ Recommends:    dconf
 
 Obsoletes:     adwaita-gtk3-theme < 3.13.3
 Provides:      adwaita-gtk3-theme = %{version}-%{release}
-Conflicts:     gtk2 < 2.24.29
-Obsoletes:     gtk-update-icon-cache < %{version}-%{release}
-Provides:      gtk-update-icon-cache = %{version}-%{release}
 
 Obsoletes:     gtk3-engines <= 2.91.5-5.fc15
 Obsoletes:     gtk-solidity-engine < 0.4.1-9
@@ -223,6 +220,7 @@ gtk-query-immodules-3.0-64 --update-cache &>/dev/null || :
 %{_bindir}/gtk-builder-tool
 %{_bindir}/gtk-encode-symbolic-svg
 %{_bindir}/gtk-query-settings
+%{_datadir}/gtk-3.0/valgrind/gtk.supp
 %{_datadir}/applications/gtk3-demo.desktop
 %{_datadir}/applications/gtk3-icon-browser.desktop
 %{_datadir}/applications/gtk3-widget-factory.desktop
@@ -255,6 +253,9 @@ gtk-query-immodules-3.0-64 --update-cache &>/dev/null || :
 %{_mandir}/man1/gtk3-widget-factory.1*
 
 %changelog
+* Sat Jun 20 2020 wangye <wangye70@huawei.com> - 3.24.1-4
+- Package echancemen
+
 * Sat Mar 14 2020 songnannan <songnannan2@huawei.com> - 3.24.1-3
 - disable package
 
