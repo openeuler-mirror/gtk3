@@ -14,7 +14,7 @@
 #Basic Information
 Name:    gtk3
 Version: 3.24.1
-Release: 3
+Release: 4
 Summary: GTK+ graphical user interface library
 License: LGPLv2+
 URL:     http://www.gtk.org
@@ -255,6 +255,9 @@ gtk-query-immodules-3.0-64 --update-cache &>/dev/null || :
 %{_mandir}/man1/gtk3-widget-factory.1*
 
 %changelog
+* Tue Aug 18 2020 chenyaqiang <chenyaqiang@huawei.com> - 3.24.1-4
+- rebuild for package build
+
 * Sat Mar 14 2020 songnannan <songnannan2@huawei.com> - 3.24.1-3
 - disable package
 
