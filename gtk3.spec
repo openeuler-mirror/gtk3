@@ -13,8 +13,8 @@
 
 #Basic Information
 Name:    gtk3
-Version: 3.24.1
-Release: 4
+Version: 3.24.21
+Release: 1
 Summary: GTK+ graphical user interface library
 License: LGPLv2+
 URL:     http://www.gtk.org
@@ -223,6 +223,7 @@ gtk-query-immodules-3.0-64 --update-cache &>/dev/null || :
 %{_bindir}/gtk-builder-tool
 %{_bindir}/gtk-encode-symbolic-svg
 %{_bindir}/gtk-query-settings
+%{_datadir}/gtk-3.0/valgrind/gtk.supp
 %{_datadir}/applications/gtk3-demo.desktop
 %{_datadir}/applications/gtk3-icon-browser.desktop
 %{_datadir}/applications/gtk3-widget-factory.desktop
@@ -255,6 +256,9 @@ gtk-query-immodules-3.0-64 --update-cache &>/dev/null || :
 %{_mandir}/man1/gtk3-widget-factory.1*
 
 %changelog
+* Wed Aug 26 2020 hanhui <hanhui@huawei.com> - 3.24.21-1
+- update to 3.24.21
+
 * Tue Aug 18 2020 chenyaqiang <chenyaqiang@huawei.com> - 3.24.1-4
 - rebuild for package build
 
