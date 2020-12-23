@@ -13,7 +13,7 @@
 
 #Basic Information
 Name:    gtk3
-Version: 3.24.21
+Version: 3.24.22
 Release: 1
 Summary: GTK+ graphical user interface library
 License: LGPLv2+
@@ -256,6 +256,9 @@ gtk-query-immodules-3.0-64 --update-cache &>/dev/null || :
 %{_mandir}/man1/gtk3-widget-factory.1*
 
 %changelog
+* Wed Dec 23 2020 huanghaitao <huanghaitao8@huawei.com> - 3.24.22-1
+- update gtk3.24.22
+
 * Thu Jul 23 2020 hanhui <hanhui15@huawei.com> - 3.24.21-1
 - update gtk3.24.21
 
