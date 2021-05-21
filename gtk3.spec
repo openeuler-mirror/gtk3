@@ -9,11 +9,11 @@
 %define wayland_protocols_version 1.12
 %define bin_version 3.0.0
 %define enable_immodules_package 0
-%global __provides_exclude_from ^%{_libdir}/gtk-3.0
+%global __provides_exclude_from %{_libdir}/gtk-3.0
 
 #Basic Information
 Name:    gtk3
-Version: 3.24.22
+Version: 3.24.29
 Release: 1
 Summary: GTK+ graphical user interface library
 License: LGPLv2+
@@ -256,6 +256,11 @@ gtk-query-immodules-3.0-64 --update-cache &>/dev/null || :
 %{_mandir}/man1/gtk3-widget-factory.1*
 
 %changelog
+* Wed May 19 2021 weijin deng <weijin.deng@turbolinux.com.cn> - 3.24.29-1
+- Upgrade to 3.24.29
+- Update Version
+- Delete '^' char
+
 * Wed Dec 23 2020 huanghaitao <huanghaitao8@huawei.com> - 3.24.22-1
 - update gtk3.24.22
 
