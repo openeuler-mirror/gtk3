@@ -14,7 +14,7 @@
 #Basic Information
 Name:    gtk3
 Version: 3.24.21
-Release: 1
+Release: 2
 Summary: GTK+ graphical user interface library
 License: LGPLv2+
 URL:     http://www.gtk.org
@@ -29,7 +29,7 @@ BuildRequires: pkgconfig(xi) pkgconfig(xrandr) pkgconfig(xinerama) pkgconfig(xco
 BuildRequires: pkgconfig(xkbcommon) pkgconfig(epoxy) >= %{epoxy_version}
 BuildRequires: wayland-devel >= %{wayland_version} wayland-protocols-devel >= %{wayland_protocols_version}
 BuildRequires: pkgconfig(colord) pkgconfig(json-glib-1.0) pkgconfig(rest-0.7)
-BuildRequires: gettext gtk-doc cups-devel libtool desktop-file-utils
+BuildRequires: gettext gtk-doc cups-devel libtool desktop-file-utils libXcursor-devel 
 Requires:      adwaita-icon-theme hicolor-icon-theme
 Requires:      atk >= %{atk_version} glib2 >= %{glib2_version} pango >= %{pango_version}
 Requires:      cairo >= %{cairo_version} cairo-gobject >= %{cairo_version}
@@ -256,6 +256,9 @@ gtk-query-immodules-3.0-64 --update-cache &>/dev/null || :
 %{_mandir}/man1/gtk3-widget-factory.1*
 
 %changelog
+* Wed Jun 23 2021 chenbo pan <panchenbo@uniontech.com> - 3.24.21-2
+- Fix virt-manager 'NoneType' object has no attribute 'conn' error
+
 * Wed Aug 26 2020 hanhui <hanhui@huawei.com> - 3.24.21-1
 - update to 3.24.21
 
