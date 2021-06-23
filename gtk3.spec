@@ -256,7 +256,7 @@ gtk-query-immodules-3.0-64 --update-cache &>/dev/null || :
 %{_mandir}/man1/gtk3-widget-factory.1*
 
 %changelog
-* Wed Jun 23 2021 chenbo pan <panchenbo@uniontech.com.cn> - 3.24.29-2
+* Wed Jun 23 2021 chenbo pan <panchenbo@uniontech.com> - 3.24.29-2
 - Fix virt-manager 'NoneType' object has no attribute 'conn' error
 
 * Wed May 19 2021 weijin deng <weijin.deng@turbolinux.com.cn> - 3.24.29-1
