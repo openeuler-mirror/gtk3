@@ -14,7 +14,7 @@
 #Basic Information
 Name:    gtk3
 Version: 3.24.30
-Release: 1
+Release: 2
 Summary: GTK+ graphical user interface library
 License: LGPLv2+
 URL:     http://www.gtk.org
@@ -72,6 +72,12 @@ Requires:      gtk3 = %{version}-%{release}
 
 %description   immodule-xim
 The gtk3-immodule-xim package contains XIM support for GTK+ 3.
+
+%package       -n gtk-update-icon-cache
+Summary:       Icon theme caching utility
+
+%description   -n gtk-update-icon-cache
+GTK+ can use the cache files created by gtk-update-icon-cache to avoid alot of system call and disk seek overhead when the application starts.Since the format of the cache files allows them to be mmap()ed shared between multiple applications,the overall memory consumption is reduced as well.
 
 %package       devel
 Summary:       Development files for gtk+3
@@ -168,7 +174,6 @@ gtk-query-immodules-3.0-64 --update-cache &>/dev/null || :
 %{_bindir}/broadwayd
 %{_bindir}/gtk-launch
 %{_bindir}/gtk-query-immodules-3.0*
-%{_bindir}/gtk-update-icon-cache
 %{_libdir}/libgtk-3.so.*
 %{_libdir}/libgdk-3.so.*
 %{_libdir}/libgailutil-3.so.*
@@ -193,6 +198,10 @@ gtk-query-immodules-3.0-64 --update-cache &>/dev/null || :
 %exclude %{_libdir}/gtk-3.0/%{bin_version}/immodules/*
 %exclude %{_sysconfdir}/gtk-3.0/im-multipress.conf
 %endif
+
+%files -n gtk-update-icon-cache
+%license COPYING
+%{_bindir}/gtk-update-icon-cache
 
 %if 0%{?enable_immodules_package}
 %files immodules
@@ -256,7 +265,10 @@ gtk-query-immodules-3.0-64 --update-cache &>/dev/null || :
 %{_mandir}/man1/gtk3-widget-factory.1*
 
 %changelog
-* Fri Nov 03 2021 liuyumeng <liuyumeng5@huawei.com> - 3.24.30-1
+* Mon Dec 06 2021 liuyumeng <liuyumeng5@huawei.com> - 3.24.30-2
+- fix the date in the changelog,Split the update-icon-cache sub-package from the main package
+
+* Fri Dec 03 2021 liuyumeng <liuyumeng5@huawei.com> - 3.24.30-1
 - update to gtk3-3.24.30-1
 
 * Wed Jun 23 2021 chenbo pan <panchenbo@uniontech.com> - 3.24.29-2
