@@ -13,8 +13,8 @@
 
 #Basic Information
 Name:    gtk3
-Version: 3.24.29
-Release: 3
+Version: 3.24.30
+Release: 1
 Summary: GTK+ graphical user interface library
 License: LGPLv2+
 URL:     http://www.gtk.org
@@ -265,6 +265,9 @@ gtk-query-immodules-3.0-64 --update-cache &>/dev/null || :
 %{_mandir}/man1/gtk3-widget-factory.1*
 
 %changelog
+* Tue Dec 14 2021 liuyumeng <liuyumeng5@huawei.com> - 3.24.30-1
+- update to gtk3-3.24.30-1
+
 * Wed Nov 03 2021 liuyumeng <liuyumeng5@huawei.com> - 3.24.29-3
 - Split the update-icon-cache sub-package from the main package
 
