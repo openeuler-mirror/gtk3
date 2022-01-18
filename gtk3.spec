@@ -14,7 +14,7 @@
 #Basic Information
 Name:    gtk3
 Version: 3.24.30
-Release: 2
+Release: 3
 Summary: GTK+ graphical user interface library
 License: LGPLv2+
 URL:     http://www.gtk.org
@@ -29,7 +29,11 @@ BuildRequires: pkgconfig(xi) pkgconfig(xrandr) pkgconfig(xinerama) pkgconfig(xco
 BuildRequires: pkgconfig(xkbcommon) pkgconfig(epoxy) >= %{epoxy_version}
 BuildRequires: wayland-devel >= %{wayland_version} wayland-protocols-devel >= %{wayland_protocols_version}
 BuildRequires: pkgconfig(colord) pkgconfig(json-glib-1.0) pkgconfig(rest-0.7)
-BuildRequires: gettext gtk-doc cups-devel libtool desktop-file-utils libXcursor-devel 
+BuildRequires: gettext gtk-doc libtool desktop-file-utils libXcursor-devel 
+%if 0%{?openEuler}
+BuildRequires: cups-devel
+%endif
+
 Requires:      adwaita-icon-theme hicolor-icon-theme
 Requires:      atk >= %{atk_version} glib2 >= %{glib2_version} pango >= %{pango_version}
 Requires:      cairo >= %{cairo_version} cairo-gobject >= %{cairo_version}
@@ -120,7 +124,10 @@ export CFLAGS='-fno-strict-aliasing %optflags'
         --enable-broadway-backend \
         --enable-colord \
         --enable-installed-tests \
-        --with-included-immodules=wayland
+        --with-included-immodules=wayland \
+	%if !0%{?openEuler}
+	--disable-cups
+	%endif
 )
 
 # fight unused direct deps
@@ -265,6 +272,9 @@ gtk-query-immodules-3.0-64 --update-cache &>/dev/null || :
 %{_mandir}/man1/gtk3-widget-factory.1*
 
 %changelog
+* Fri Jan 14 2022 wangkerong <wangkerong@huawei.com> - 3.24.30-3
+- Other distros disable cups
+
 * Mon Dec 06 2021 liuyumeng <liuyumeng5@huawei.com> - 3.24.30-2
 - fix the date in the changelog,Split the update-icon-cache sub-package from the main package
 
