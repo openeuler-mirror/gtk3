@@ -14,7 +14,7 @@
 #Basic Information
 Name:    gtk3
 Version: 3.24.30
-Release: 2
+Release: 3
 Summary: GTK+ graphical user interface library
 License: LGPLv2+
 URL:     http://www.gtk.org
@@ -45,8 +45,6 @@ Recommends:    dconf
 Obsoletes:     adwaita-gtk3-theme < 3.13.3
 Provides:      adwaita-gtk3-theme = %{version}-%{release}
 Conflicts:     gtk2 < 2.24.29
-Obsoletes:     gtk-update-icon-cache < %{version}-%{release}
-Provides:      gtk-update-icon-cache = %{version}-%{release}
 
 Obsoletes:     gtk3-engines <= 2.91.5-5.fc15
 Obsoletes:     gtk-solidity-engine < 0.4.1-9
@@ -79,6 +77,7 @@ The gtk3-immodule-xim package contains XIM support for GTK+ 3.
 
 %package       -n gtk-update-icon-cache
 Summary:       Icon theme caching utility
+Obsoletes:     gtk-update-icon-cache < %{version}-%{release}
 
 %description   -n gtk-update-icon-cache
 GTK+ can use the cache files created by gtk-update-icon-cache to avoid alot of system call and disk seek overhead when the application starts.Since the format of the cache files allows them to be mmap()ed shared between multiple applications,the overall memory consumption is reduced as well.
@@ -272,6 +271,9 @@ gtk-query-immodules-3.0-64 --update-cache &>/dev/null || :
 %{_mandir}/man1/gtk3-widget-factory.1*
 
 %changelog
+* Tue Mar 08 2022 Wenlong Ding <wenlong.ding@turbolinux.com.cn> - 3.24.30-3
+- Remove 'Provides: gtk-update-icon-cache' from gtk3 package
+
 * Fri Jan 14 2022 wangkerong <wangkerong@huawei.com> - 3.24.30-2
 - Other distros disable cups
 
