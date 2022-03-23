@@ -14,11 +14,14 @@
 #Basic Information
 Name:    gtk3
 Version: 3.24.30
-Release: 4
+Release: 5
 Summary: GTK+ graphical user interface library
 License: LGPLv2+
 URL:     http://www.gtk.org
 Source0: http://download.gnome.org/sources/gtk+/3.24/gtk+-%{version}.tar.xz
+
+Patch6000:  remove-missing-reftests-when-use-meson-build-system.patch
+Patch6001:  do-not-install-reftests-when-use-meson-build-system.patch
 
 #Dependency
 BuildRequires: pkgconfig(atk) >= %{atk_version} pkgconfig(atk-bridge-2.0)
@@ -28,8 +31,8 @@ BuildRequires: pkgconfig(pango) >= %{pango_version} pkgconfig(gdk-pixbuf-2.0) >=
 BuildRequires: pkgconfig(xi) pkgconfig(xrandr) pkgconfig(xinerama) pkgconfig(xcomposite) pkgconfig(xdamage)
 BuildRequires: pkgconfig(xkbcommon) pkgconfig(epoxy) >= %{epoxy_version}
 BuildRequires: wayland-devel >= %{wayland_version} wayland-protocols-devel >= %{wayland_protocols_version}
-BuildRequires: pkgconfig(colord) pkgconfig(json-glib-1.0) pkgconfig(rest-0.7)
-BuildRequires: gettext gtk-doc libtool desktop-file-utils libXcursor-devel 
+BuildRequires: pkgconfig(colord)
+BuildRequires: gettext gtk-doc libtool desktop-file-utils libXcursor-devel meson 
 %if 0%{?openEuler}
 BuildRequires: cups-devel
 %endif
@@ -110,32 +113,23 @@ This package contains man pages and other related documents for gtk3.
 
 %build
 export CFLAGS='-fno-strict-aliasing %optflags'
-(if ! test -x configure; then NOCONFIGURE=1 ./autogen.sh; CONFIGFLAGS=--enable-gtk-doc; fi;
-%configure $CONFIGFLAGS \
-        --enable-xkb \
-        --enable-xinerama \
-        --enable-xrandr \
-        --enable-xfixes \
-        --enable-xcomposite \
-        --enable-xdamage \
-        --enable-x11-backend \
-        --enable-wayland-backend \
-        --enable-broadway-backend \
-        --enable-colord \
-        --enable-installed-tests \
-        --with-included-immodules=wayland \
-	%if !0%{?openEuler}
-	--disable-cups
-	%endif
-)
-
-# fight unused direct deps
-sed -i -e 's/ -shared / -Wl,-O1,--as-needed\0/g' libtool
-
-make %{?_smp_mflags}
+%meson \
+    -Dbroadway_backend=true \
+    -Dbuiltin_immodules=auto\
+    -Dwayland-backend=true \
+    -Dcolord=yes \
+    -Dgtk_doc=true \
+    -Dinstalled_tests=true \
+    -Dman=true \
+    -Dxinerama=yes \
+    -Dbuiltin_immodules=wayland,waylandgtk \
+    %if 0%{?openEuler}
+    -Dprint_backends=cups,file,lpr,test \
+    %endif
+%meson_build
 
 %install
-%make_install RUN_QUERY_IMMODULES_TEST=false
+%meson_install
 
 %find_lang gtk30
 %find_lang gtk30-properties
@@ -200,6 +194,7 @@ gtk-query-immodules-3.0-64 --update-cache &>/dev/null || :
 %{_datadir}/glib-2.0/schemas/org.gtk.Settings.EmojiChooser.gschema.xml
 %{_datadir}/glib-2.0/schemas/org.gtk.Settings.FileChooser.gschema.xml
 %{_datadir}/glib-2.0/schemas/org.gtk.exampleapp.gschema.xml
+%{_datadir}/gtk-3.0/emoji/
 %if ! 0%{?enable_immodules_package}
 %exclude %{_libdir}/gtk-3.0/%{bin_version}/immodules/*
 %exclude %{_sysconfdir}/gtk-3.0/im-multipress.conf
@@ -271,6 +266,9 @@ gtk-query-immodules-3.0-64 --update-cache &>/dev/null || :
 %{_mandir}/man1/gtk3-widget-factory.1*
 
 %changelog
+* Wed Mar 23 2022 wangkerong <wangkerong@h-partners.com> - 3.24.30-5
+- use meson build system and remove librest and json-gilb buildrequires
+
 * Tue Mar 08 2022 Wenlong Ding <wenlong.ding@turbolinux.com.cn> - 3.24.30-4
 - Remove 'Provides: gtk-update-icon-cache' from gtk3 package
 
