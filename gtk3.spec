@@ -1,20 +1,20 @@
 #Global macro or variable
 %define atk_version 2.15.1
-%define glib2_version 2.49.4
+%define glib2_version 2.57.2
 %define cairo_version 1.14.0
 %define pango_version 1.41.0
 %define gdk_pixbuf_version 2.30.0
 %define epoxy_version 1.4
-%define wayland_version 1.9.91
-%define wayland_protocols_version 1.12
+%define wayland_version 1.14.91
+%define wayland_protocols_version 1.14
 %define bin_version 3.0.0
 %define enable_immodules_package 0
 %global __provides_exclude_from %{_libdir}/gtk-3.0
 
 #Basic Information
 Name:    gtk3
-Version: 3.24.30
-Release: 5
+Version: 3.24.33
+Release: 1
 Summary: GTK+ graphical user interface library
 License: LGPLv2+
 URL:     http://www.gtk.org
@@ -266,6 +266,9 @@ gtk-query-immodules-3.0-64 --update-cache &>/dev/null || :
 %{_mandir}/man1/gtk3-widget-factory.1*
 
 %changelog
+* Fri Apr 01 2022 Jiacheng Zhou <jchzhou@outlook.com> - 3.24.33-1
+- Upgrade to 3.24.33
+
 * Wed Mar 23 2022 wangkerong <wangkerong@h-partners.com> - 3.24.30-5
 - use meson build system and remove librest and json-gilb buildrequires
 
